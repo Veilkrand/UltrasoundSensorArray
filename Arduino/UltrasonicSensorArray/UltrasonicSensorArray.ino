@@ -66,22 +66,22 @@ void echoCheck() { // If ping received, set the sensor distance to array.
     cm[currentSensor] = sonar[currentSensor].ping_result / US_ROUNDTRIP_CM;
 
     // Send package for the reading
-    byte reading_high = highByte(cm[currentSensor]);
-    byte reading_low = lowByte(cm[currentSensor]);
-    byte packet[]={0x59,0x59,currentSensor,reading_high,reading_low};
-    Serial.write(packet, sizeof(packet));
+//    byte reading_high = highByte(cm[currentSensor]);
+//    byte reading_low = lowByte(cm[currentSensor]);
+//    byte packet[]={0x59,0x59,currentSensor,reading_high,reading_low};
+//    Serial.write(packet, sizeof(packet));
     
 }
 
 void oneSensorCycle() { // Sensor ping cycle complete, do something with the results.
   
-  // for (uint8_t i = 0; i < SONAR_NUM; i++) {
+  for (uint8_t i = 0; i < SONAR_NUM; i++) {
 
-    // Sending bytes
-    //    byte reading_high = highByte(cm[i]);
-    //    byte reading_low = lowByte(cm[i]);
-    //    byte packet[]={0x59,0x59,i,reading_high,reading_low};
-    //    Serial.write(packet, sizeof(packet));
+     // Sending bytes
+        byte reading_high = highByte(cm[i]);
+        byte reading_low = lowByte(cm[i]);
+        byte packet[]={0x59,0x59,i,reading_high,reading_low};
+        Serial.write(packet, sizeof(packet));
     
     // Printing lines
     //    if (i!=0) Serial.print(";");
@@ -89,7 +89,7 @@ void oneSensorCycle() { // Sensor ping cycle complete, do something with the res
     //    Serial.print(":");
     //    Serial.print(cm[i]);
     
-  // }
+  }
   
   //Serial.println();
   // delay(500);

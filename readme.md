@@ -1,5 +1,7 @@
 # Ultrasound Sensor Array with Arduino and Python
 
+![Ultrasound Sensor Array](documentation/sensorArray.jpg)
+
 Using the cheap HC-SR04 ultrasonic sensor and an arduino nano we can build a low cost sensor array for robotics.
 The arduino code will poll all the sensors and send byte packets via serial interface with the index and the distance 
 to a Python app to process.
@@ -14,7 +16,8 @@ in order to avoid hitting obstacles during navigation.
 0x59, 0x59, [sensor_index], [sensor_reading high byte], [sensor_reading low byte]
 ```
 
-`sensor_index` is a one byte unsigned integer like `uint8_t`
+`sensor_index` is a one byte unsigned integer like `uint8_t`  
+
 `sensor_reading` is a two byte unsigned integer line `unsigend int`
 
 ## Sonar Array Configuration with Rover4WD
