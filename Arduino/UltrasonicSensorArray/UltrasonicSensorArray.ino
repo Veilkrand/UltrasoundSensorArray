@@ -10,7 +10,7 @@
 // ---------------------------------------------------------------------------
 #include <NewPing.h>
 
-#define SONAR_NUM     15 // Number of sensors.
+#define SONAR_NUM     5 // Number of sensors.
 #define MAX_DISTANCE 500 // Maximum distance (in cm) to ping.
 #define PING_INTERVAL 33 // Milliseconds between sensor pings (29ms is about the min to avoid cross-sensor echo).
 
@@ -22,19 +22,20 @@ uint8_t currentSensor = 0;          // Keeps track of which sensor is active.
 NewPing sonar[SONAR_NUM] = {     // Sensor object array.
   NewPing(12, 12, MAX_DISTANCE), // Each sensor's trigger pin, echo pin, and max distance to ping.
   NewPing(11, 11, MAX_DISTANCE),
-  NewPing(11, 11, MAX_DISTANCE),
-  NewPing(11, 11, MAX_DISTANCE),
-  NewPing(11, 11, MAX_DISTANCE),
-  NewPing(11, 11, MAX_DISTANCE),
-  NewPing(11, 11, MAX_DISTANCE),
-  NewPing(11, 11, MAX_DISTANCE),
-  NewPing(11, 11, MAX_DISTANCE),
-  NewPing(11, 11, MAX_DISTANCE),
-  NewPing(11, 11, MAX_DISTANCE),
-  NewPing(11, 11, MAX_DISTANCE),
-  NewPing(11, 11, MAX_DISTANCE),
-  NewPing(11, 11, MAX_DISTANCE),
-  NewPing(11, 11, MAX_DISTANCE)
+  NewPing(10, 10, MAX_DISTANCE),
+  NewPing(9, 9, MAX_DISTANCE),
+  NewPing(8, 8, MAX_DISTANCE)
+  
+//  NewPing(11, 11, MAX_DISTANCE),
+//  NewPing(11, 11, MAX_DISTANCE),
+//  NewPing(11, 11, MAX_DISTANCE),
+//  NewPing(11, 11, MAX_DISTANCE),
+//  NewPing(11, 11, MAX_DISTANCE),
+//  NewPing(11, 11, MAX_DISTANCE),
+//  NewPing(11, 11, MAX_DISTANCE),
+//  NewPing(11, 11, MAX_DISTANCE),
+//  NewPing(11, 11, MAX_DISTANCE),
+//  NewPing(11, 11, MAX_DISTANCE)
   
 };
 
@@ -63,17 +64,24 @@ void loop() {
 void echoCheck() { // If ping received, set the sensor distance to array.
   if (sonar[currentSensor].check_timer())
     cm[currentSensor] = sonar[currentSensor].ping_result / US_ROUNDTRIP_CM;
+
+    // Send package for the reading
+    byte reading_high = highByte(cm[currentSensor]);
+    byte reading_low = lowByte(cm[currentSensor]);
+    byte packet[]={0x59,0x59,currentSensor,reading_high,reading_low};
+    Serial.write(packet, sizeof(packet));
+    
 }
 
 void oneSensorCycle() { // Sensor ping cycle complete, do something with the results.
-  // The following code would be replaced with your code that does something with the ping results.
-  for (uint8_t i = 0; i < SONAR_NUM; i++) {
+  
+  // for (uint8_t i = 0; i < SONAR_NUM; i++) {
 
     // Sending bytes
-    byte reading_high = highByte(cm[i]);
-    byte reading_low = lowByte(cm[i]);
-    byte packet[]={0x59,0x59,i,reading_high,reading_low};
-    Serial.write(packet, sizeof(packet));
+    //    byte reading_high = highByte(cm[i]);
+    //    byte reading_low = lowByte(cm[i]);
+    //    byte packet[]={0x59,0x59,i,reading_high,reading_low};
+    //    Serial.write(packet, sizeof(packet));
     
     // Printing lines
     //    if (i!=0) Serial.print(";");
@@ -81,9 +89,9 @@ void oneSensorCycle() { // Sensor ping cycle complete, do something with the res
     //    Serial.print(":");
     //    Serial.print(cm[i]);
     
-  }
+  // }
+  
   //Serial.println();
-
   // delay(500);
 
 }

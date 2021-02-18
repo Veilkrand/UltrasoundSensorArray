@@ -8,3 +8,7 @@ For measuring the distances we use a sonar technique to calculate the time of fl
 inaccurate for distance measurement but can be used as a cheap low level fail-safe system for proximity object detection 
 in order to avoid hitting obstacles during navigation. 
 
+## Sonar Array Configuration with Rover4WD
+
+![Rover4WD with sensor array](documentation/roverSonarArray.jpg)
+)
