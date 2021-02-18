@@ -11,7 +11,7 @@ in order to avoid hitting obstacles during navigation.
 
 ## Byte protocol sensor array message
 ```
-0x59, 0x59, \[sensor_index\], \[sensor_reading high byte]\, \[sensor_reading low byte\]
+0x59, 0x59, [sensor_index], [sensor_reading high byte], [sensor_reading low byte]
 ```
 
 `sensor_index` is a one byte unsigned integer like `uint8_t`
