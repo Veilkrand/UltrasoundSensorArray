@@ -24,3 +24,6 @@ in order to avoid hitting obstacles during navigation.
 
 ![Rover4WD with sensor array](documentation/roverSonarArray.jpg)
 
+## Breadboard Schematics
+
+![Schematics sensor array](documentation/UltrasoundArraySchematics.jpg)
