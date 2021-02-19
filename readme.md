@@ -2,6 +2,9 @@
 
 ![Ultrasound Sensor Array](documentation/sensorArray.jpg)
 
+
+***This repository is part of [this article](https://albertonaranjo.medium.com/building-a-sonar-sensor-array-with-arduino-and-python-c5b4cf30b945)***
+
 Using the cheap HC-SR04 ultrasonic sensor and an arduino nano we can build a low cost sensor array for robotics.
 The arduino code will poll all the sensors and send byte packets via serial interface with the index and the distance 
 to a Python app to process.
@@ -12,9 +15,11 @@ in order to avoid hitting obstacles during navigation.
 
 
 ## Byte protocol sensor array message
-```
-0x59, 0x59, [sensor_index], [sensor_reading high byte], [sensor_reading low byte]
-```
+
+|Byte 1 |Byte 2 |Byte 3         |Byte 4                     |Byte 5                 |
+|---	|---	|---	        |---	                    |---                    |
+|0x59   |0x59   |sensor_index   |sensor_reading high byte   |sensor_reading low byte|
+
 
 `sensor_index` is a one byte unsigned integer like `uint8_t`  
 
